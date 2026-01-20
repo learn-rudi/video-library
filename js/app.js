@@ -55,33 +55,15 @@ let expandedRow = null;
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('show');
-}
+  const isOpen = sidebar.classList.contains('open');
 
-function closeSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const overlay = document.getElementById('overlay');
-  sidebar.classList.remove('open');
-  overlay.classList.remove('show');
-}
-
-function collapseSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.add('collapsed');
-  document.body.classList.add('sidebar-collapsed');
-  const toggle = sidebar.querySelector('.sidebar__toggle');
-  toggle.textContent = '▶';
-  toggle.onclick = expandSidebar;
-}
-
-function expandSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.remove('collapsed');
-  document.body.classList.remove('sidebar-collapsed');
-  const toggle = sidebar.querySelector('.sidebar__toggle');
-  toggle.textContent = '◀';
-  toggle.onclick = collapseSidebar;
+  if (isOpen) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  } else {
+    sidebar.classList.add('open');
+    overlay.classList.add('show');
+  }
 }
 
 // === UTILS ===
@@ -225,7 +207,7 @@ function setView(view) {
   document.body.className = `view-${view}`;
   expandedRow = null;
   render();
-  closeSidebar(); // Close on mobile after selecting
+  toggleSidebar(); // Close sidebar after selecting
 }
 
 // === INIT ===

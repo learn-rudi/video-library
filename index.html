@@ -10,17 +10,11 @@
 </head>
 <body class="view-all">
   <div class="app">
-    <!-- Mobile Header -->
-    <header class="mobile-header">
-      <span class="mobile-header__title">Video Library</span>
-      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-    </header>
-
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar__header">
         <div class="sidebar__title">Video Library</div>
-        <button class="sidebar__close" onclick="closeSidebar()">✕</button>
+        <button class="sidebar__close" onclick="toggleSidebar()">✕</button>
       </div>
 
       <div class="sidebar__section">
@@ -50,18 +44,16 @@
           <span>Horizontal</span>
         </div>
       </div>
-
-      <button class="sidebar__toggle" onclick="collapseSidebar()">◀</button>
     </aside>
 
     <!-- Overlay for mobile -->
-    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <!-- Main Content -->
     <main class="main">
       <div class="toolbar">
         <div class="toolbar__left">
-          <button class="toolbar__toggle" onclick="expandSidebar()">☰</button>
+          <button class="menu-btn" onclick="toggleSidebar()">☰</button>
           <span class="toolbar__title" id="view-title">All Videos</span>
           <span class="toolbar__count" id="video-count"></span>
         </div>

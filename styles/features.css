@@ -58,65 +58,6 @@
   color: var(--accent-blue);
 }
 
-/* Desktop sidebar toggle */
-.sidebar__toggle {
-  display: none;
-  position: absolute;
-  right: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 10px;
-  color: var(--text-muted);
-  z-index: 10;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar__toggle:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-}
-
-/* Toolbar toggle for collapsed state */
-.toolbar__toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: var(--text-muted);
-  padding: var(--space-xs);
-  margin-right: var(--space-sm);
-}
-
-.toolbar__toggle:hover {
-  color: var(--text-primary);
-}
-
-@media (min-width: 768px) {
-  .sidebar__toggle {
-    display: flex;
-  }
-
-  .toolbar__toggle {
-    display: none;
-  }
-
-  body.sidebar-collapsed .toolbar__toggle {
-    display: block;
-  }
-
-  body.sidebar-collapsed .sidebar__toggle {
-    display: none;
-  }
-}
-
 /* Hide columns on small screens */
 @media (max-width: 600px) {
   .col-duration,

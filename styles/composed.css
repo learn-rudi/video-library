@@ -5,42 +5,18 @@
 /* Layout */
 .app {
   display: flex;
-  flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
-/* Mobile Header */
-.mobile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-md) var(--space-lg);
-  background: var(--bg-sidebar);
-  border-bottom: 1px solid var(--border);
-}
-
-.mobile-header__title {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-}
-
-.menu-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: var(--space-xs);
-  color: var(--text-secondary);
-}
-
-/* Sidebar */
+/* Sidebar - hidden by default, toggled via JS */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: var(--sidebar-width);
-  height: 100vh;
+  height: 100%;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
   display: flex;
@@ -75,6 +51,11 @@
   cursor: pointer;
   color: var(--text-muted);
   padding: var(--space-xs);
+  line-height: 1;
+}
+
+.sidebar__close:hover {
+  color: var(--text-primary);
 }
 
 .sidebar__section {
@@ -136,6 +117,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 100%;
 }
 
 /* Toolbar */
@@ -146,6 +128,7 @@
   padding: var(--space-md) var(--space-lg);
   border-bottom: 1px solid var(--border);
   background: var(--bg-primary);
+  flex-shrink: 0;
 }
 
 .toolbar__left {
@@ -162,6 +145,21 @@
 .toolbar__count {
   font-size: var(--font-size-sm);
   color: var(--text-muted);
+}
+
+/* Menu button */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: var(--space-xs);
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.menu-btn:hover {
+  color: var(--text-primary);
 }
 
 /* Table Container */
@@ -272,7 +270,6 @@
 
 /* Copy button */
 .copy-btn {
-  opacity: 1;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
@@ -381,43 +378,8 @@
   color: var(--text-secondary);
 }
 
-/* === DESKTOP (768px+) === */
+/* === TABLET+ (768px) === */
 @media (min-width: 768px) {
-  .app {
-    flex-direction: row;
-  }
-
-  .mobile-header {
-    display: none;
-  }
-
-  .sidebar {
-    position: relative;
-    transform: translateX(0);
-    flex-shrink: 0;
-    transition: width 0.2s ease;
-  }
-
-  .sidebar.collapsed {
-    width: 0;
-    min-width: 0;
-    overflow: hidden;
-    border: none;
-  }
-
-  .sidebar.collapsed .sidebar__header,
-  .sidebar.collapsed .sidebar__section {
-    display: none;
-  }
-
-  .sidebar__close {
-    display: none;
-  }
-
-  .overlay {
-    display: none !important;
-  }
-
   .detail-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
