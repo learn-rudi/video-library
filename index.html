@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Library</title>
+  <link rel="stylesheet" href="styles/primitives.css">
+  <link rel="stylesheet" href="styles/composed.css">
+  <link rel="stylesheet" href="styles/features.css">
+</head>
+<body class="view-all">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar__header">
+        <div class="sidebar__title">Video Library</div>
+      </div>
+
+      <div class="sidebar__section">
+        <div class="sidebar__label">Views</div>
+        <div class="sidebar__item" data-view="all" onclick="setView('all')">
+          <span class="sidebar__icon">📋</span>
+          <span>All Videos</span>
+        </div>
+        <div class="sidebar__item" data-view="ready" onclick="setView('ready')">
+          <span class="sidebar__icon">✅</span>
+          <span>Ready to Post</span>
+        </div>
+        <div class="sidebar__item" data-view="synced" onclick="setView('synced')">
+          <span class="sidebar__icon">📱</span>
+          <span>Synced to Phone</span>
+        </div>
+      </div>
+
+      <div class="sidebar__section">
+        <div class="sidebar__label">By Format</div>
+        <div class="sidebar__item" data-view="vertical" onclick="setView('vertical')">
+          <span class="sidebar__icon">📐</span>
+          <span>Vertical</span>
+        </div>
+        <div class="sidebar__item" data-view="horizontal" onclick="setView('horizontal')">
+          <span class="sidebar__icon">🖥️</span>
+          <span>Horizontal</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="toolbar">
+        <div class="toolbar__left">
+          <span class="toolbar__title" id="view-title">All Videos</span>
+          <span class="toolbar__count" id="video-count"></span>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="col-date">Date</th>
+              <th class="col-hook">Hook</th>
+              <th class="col-title">Title</th>
+              <th class="col-duration">Duration</th>
+              <th class="col-orientation">Format</th>
+              <th class="col-status">Status</th>
+              <th class="col-actions"></th>
+            </tr>
+          </thead>
+          <tbody id="video-list"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Copied!</div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

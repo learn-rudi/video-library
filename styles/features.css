@@ -1,0 +1,72 @@
+/* === FEATURES ===
+   Feature-specific overrides
+*/
+
+/* Clickable row */
+.table tbody tr {
+  cursor: pointer;
+}
+
+/* Column widths */
+.col-num { width: 40px; }
+.col-date { width: 100px; }
+.col-hook { width: 180px; }
+.col-title { width: 280px; }
+.col-duration { width: 70px; }
+.col-orientation { width: 100px; }
+.col-status { width: 90px; }
+.col-actions { width: 120px; }
+
+/* Row expand indicator */
+.expand-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+}
+
+.row-expanded .expand-icon {
+  transform: rotate(90deg);
+}
+
+/* Full-width detail cell */
+.row-detail td {
+  padding: var(--space-xl) !important;
+}
+
+.detail-full {
+  grid-column: 1 / -1;
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sidebar active states by view */
+.view-all .sidebar__item[data-view="all"],
+.view-ready .sidebar__item[data-view="ready"],
+.view-synced .sidebar__item[data-view="synced"],
+.view-vertical .sidebar__item[data-view="vertical"],
+.view-horizontal .sidebar__item[data-view="horizontal"] {
+  background: var(--bg-selected);
+  color: var(--accent-blue);
+}
