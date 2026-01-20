@@ -69,6 +69,7 @@ function closeSidebar() {
 function collapseSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.add('collapsed');
+  document.body.classList.add('sidebar-collapsed');
   const toggle = sidebar.querySelector('.sidebar__toggle');
   toggle.textContent = '▶';
   toggle.onclick = expandSidebar;
@@ -77,6 +78,7 @@ function collapseSidebar() {
 function expandSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.remove('collapsed');
+  document.body.classList.remove('sidebar-collapsed');
   const toggle = sidebar.querySelector('.sidebar__toggle');
   toggle.textContent = '◀';
   toggle.onclick = collapseSidebar;

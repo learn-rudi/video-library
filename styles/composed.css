@@ -395,20 +395,23 @@
     position: relative;
     transform: translateX(0);
     flex-shrink: 0;
+    transition: width 0.2s ease;
   }
 
   .sidebar.collapsed {
     width: 0;
+    min-width: 0;
     overflow: hidden;
     border: none;
   }
 
-  .sidebar__close {
+  .sidebar.collapsed .sidebar__header,
+  .sidebar.collapsed .sidebar__section {
     display: none;
   }
 
-  .sidebar__toggle {
-    display: block;
+  .sidebar__close {
+    display: none;
   }
 
   .overlay {
