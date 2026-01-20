@@ -51,6 +51,37 @@ const videos = [
 let currentView = 'all';
 let expandedRow = null;
 
+// === SIDEBAR ===
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+}
+
+function collapseSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.add('collapsed');
+  const toggle = sidebar.querySelector('.sidebar__toggle');
+  toggle.textContent = '▶';
+  toggle.onclick = expandSidebar;
+}
+
+function expandSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.remove('collapsed');
+  const toggle = sidebar.querySelector('.sidebar__toggle');
+  toggle.textContent = '◀';
+  toggle.onclick = collapseSidebar;
+}
+
 // === UTILS ===
 function toast(msg) {
   const el = document.getElementById('toast');
@@ -192,6 +223,7 @@ function setView(view) {
   document.body.className = `view-${view}`;
   expandedRow = null;
   render();
+  closeSidebar(); // Close on mobile after selecting
 }
 
 // === INIT ===

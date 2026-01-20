@@ -1,25 +1,63 @@
 /* === COMPOSED ===
-   Reusable components - Airtable style
+   Reusable components - Airtable style, Mobile-first
 */
 
 /* Layout */
 .app {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   overflow: hidden;
 }
 
+/* Mobile Header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-header__title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: var(--space-xs);
+  color: var(--text-secondary);
+}
+
 /* Sidebar */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: var(--sidebar-width);
+  height: 100vh;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
+  z-index: 100;
+  transform: translateX(-100%);
+  transition: transform 0.2s ease;
+}
+
+.sidebar.open {
+  transform: translateX(0);
 }
 
 .sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: var(--space-lg);
   border-bottom: 1px solid var(--border-light);
 }
@@ -28,6 +66,15 @@
   font-size: var(--font-size-lg);
   font-weight: 600;
   color: var(--text-primary);
+}
+
+.sidebar__close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: var(--space-xs);
 }
 
 .sidebar__section {
@@ -67,6 +114,22 @@
   text-align: center;
 }
 
+/* Overlay */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 50;
+}
+
+.overlay.show {
+  display: block;
+}
+
 /* Main content */
 .main {
   flex: 1;
@@ -88,7 +151,7 @@
 .toolbar__left {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .toolbar__title {
@@ -101,16 +164,19 @@
   color: var(--text-muted);
 }
 
-/* Table */
+/* Table Container */
 .table-container {
   flex: 1;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Table */
 .table {
   width: 100%;
   border-collapse: collapse;
   font-size: var(--font-size-sm);
+  min-width: 600px;
 }
 
 .table th {
@@ -206,27 +272,24 @@
 
 /* Copy button */
 .copy-btn {
-  opacity: 0;
-  background: none;
-  border: none;
-  color: var(--text-muted);
+  opacity: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
   font-size: var(--font-size-xs);
 }
 
 .copy-btn:hover {
-  background: var(--bg-secondary);
+  background: var(--bg-hover);
   color: var(--text-primary);
-}
-
-tr:hover .copy-btn {
-  opacity: 1;
 }
 
 .copy-btn.copied {
   color: var(--accent-green);
+  border-color: var(--accent-green);
 }
 
 /* Expandable row detail */
@@ -245,9 +308,8 @@ tr:hover .copy-btn {
 
 .detail-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg);
-  max-width: 800px;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
 }
 
 .detail-field {
@@ -268,12 +330,14 @@ tr:hover .copy-btn {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
+  word-break: break-word;
 }
 
 .detail-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
 .btn {
@@ -284,6 +348,7 @@ tr:hover .copy-btn {
   border: 1px solid var(--border);
   background: var(--bg-primary);
   color: var(--text-primary);
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -310,7 +375,57 @@ tr:hover .copy-btn {
 .tag {
   font-size: var(--font-size-xs);
   padding: 2px 6px;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
+}
+
+/* === DESKTOP (768px+) === */
+@media (min-width: 768px) {
+  .app {
+    flex-direction: row;
+  }
+
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    position: relative;
+    transform: translateX(0);
+    flex-shrink: 0;
+  }
+
+  .sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+    border: none;
+  }
+
+  .sidebar__close {
+    display: none;
+  }
+
+  .sidebar__toggle {
+    display: block;
+  }
+
+  .overlay {
+    display: none !important;
+  }
+
+  .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    max-width: 800px;
+  }
+
+  .copy-btn {
+    opacity: 0;
+  }
+
+  tr:hover .copy-btn {
+    opacity: 1;
+  }
 }

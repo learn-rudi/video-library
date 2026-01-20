@@ -15,21 +15,7 @@
 .col-duration { width: 70px; }
 .col-orientation { width: 100px; }
 .col-status { width: 90px; }
-.col-actions { width: 120px; }
-
-/* Row expand indicator */
-.expand-icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  text-align: center;
-  color: var(--text-muted);
-  transition: transform 0.15s;
-}
-
-.row-expanded .expand-icon {
-  transform: rotate(90deg);
-}
+.col-actions { width: 100px; }
 
 /* Full-width detail cell */
 .row-detail td {
@@ -44,21 +30,22 @@
 .toast {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
   background: var(--text-primary);
   color: var(--bg-primary);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
   opacity: 0;
-  transform: translateY(10px);
   transition: all 0.2s;
   pointer-events: none;
+  z-index: 200;
 }
 
 .toast.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Sidebar active states by view */
@@ -69,4 +56,78 @@
 .view-horizontal .sidebar__item[data-view="horizontal"] {
   background: var(--bg-selected);
   color: var(--accent-blue);
+}
+
+/* Desktop sidebar toggle */
+.sidebar__toggle {
+  display: none;
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+  z-index: 10;
+}
+
+.sidebar__toggle:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Toolbar toggle for collapsed state */
+.toolbar__toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: var(--space-xs);
+}
+
+.toolbar__toggle:hover {
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .sidebar__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar.collapsed + .main .toolbar__toggle {
+    display: block;
+  }
+}
+
+/* Hide columns on small screens */
+@media (max-width: 600px) {
+  .col-duration,
+  .col-orientation,
+  .table th:nth-child(5),
+  .table td:nth-child(5),
+  .table th:nth-child(6),
+  .table td:nth-child(6) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .col-hook,
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    display: none;
+  }
+
+  .cell-title {
+    max-width: 150px;
+  }
 }
